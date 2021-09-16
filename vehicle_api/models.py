@@ -25,7 +25,7 @@ class Deal(Base):
     title = Column(String, index=True)
     description = Column(String, index=True)
 
-    vehicles = relationship("Vehicle", back_populates="deals", cascade="all, delete, delete-orphan", uselist="false")
+    vehicle = relationship("Vehicle", back_populates="deals", cascade="all, delete, delete-orphan", uselist="false")
 
 
 class Dealer(Base):
