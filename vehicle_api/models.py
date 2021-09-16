@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Date
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -10,6 +10,8 @@ class Customer(Base):
     location = Column(String)
     email = Column(String, unique=True, index=True)
     phone = Column(String, unique=True)
+
+    vehicle_id = Column(Integer, ForeignKey("vehicle.id"))
 
     deals = relationship(
         "Deal", back_populates="customers", cascade="all, delete, delete-orphan", uselist="false"
@@ -41,6 +43,9 @@ class Vehicle(Base):
     __tablename__ = "vehicles"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    name = Column(String, index=True)
+    vin = Column(String, index=True)
+    model = Column(String)
+    year = Column(Date)
     brand = Column(String)
+
+    dealer_id = Column(Integer, ForeignKey("dealers.id"))
